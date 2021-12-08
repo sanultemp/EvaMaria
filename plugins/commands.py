@@ -99,34 +99,11 @@ async def start(client, message):
         chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,
-        )
-  
-#Admin Hide Command
+        )  
 
-@Client.on_message(filters.command("hide"))
-async def hide(client, message):
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
-    if len(message.command) != 2:
-        buttons = [[         
-            InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat='')
-            ],[
-            InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
-        ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode='html'
-        )
-        return
+#Help Command (Only for admins)
 
-#Only admin command
-
-@Client.on_message(filters.command('seek') & filters.user(ADMINS))
+@Client.on_message(filters.command('help') & filters.user(ADMINS))
 async def send_message(bot, message):
     if len(message.command) != 2:
         buttons = [[         
