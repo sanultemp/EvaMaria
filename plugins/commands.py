@@ -62,7 +62,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🤖 Join Flix PSA LK", url=https://t.me/FlixPSA
+                    "🤖 Join Flix PSA LK", url="https://t.me/FlixPSA"
                 )
             ]
         ]
